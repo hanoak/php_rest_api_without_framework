@@ -57,5 +57,21 @@ class Student {
         return FALSE;
     }
 
+    public function putData() {
+
+        $stmt = $this->conn->prepare('UPDATE students SET name = :name, address = :address, age = :age WHERE id = :id');
+
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':age', $this->age);
+        $stmt->bindParam(':id', $this->id);
+
+        if($stmt->execute()) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
 
 }
