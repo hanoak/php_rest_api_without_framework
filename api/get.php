@@ -10,7 +10,7 @@
 
     $student = new Student($db);
 
-    $res = $student->get();
+    $res = $student->fetchAll();
     $resCount = $res->rowCount();
 
     if($resCount > 0) {
