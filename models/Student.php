@@ -73,5 +73,17 @@ class Student {
         return FALSE;
     }
 
+    public function delete() {
+
+        $stmt = $this->conn->prepare('DELETE FROM students WHERE id = :id');
+        $stmt->bindParam(':id', $this->id);
+
+        if($stmt->execute()) {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
 
 }
