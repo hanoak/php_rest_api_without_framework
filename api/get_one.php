@@ -5,29 +5,34 @@
     include_once '../config/Database.php';
     include_once '../models/Student.php';
 
-    $db = new Database();
-    $db = $db->connect();
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    $student = new Student($db);
+        $db = new Database();
+        $db = $db->connect();
 
-    $data = json_decode(file_get_contents("php://input"));
+        $student = new Student($db);
 
-    if(isset($data->id)) {
-        $student->id = $data->id;
+        $data = json_decode(file_get_contents("php://input"));
 
-        if($student->fetchOne()) {
+        if(isset($data->id)) {
+            $student->id = $data->id;
 
-            print_r(json_encode(array(
-                'id' => $student->id,
-                'name' => $student->name,
-                'address' => $student->address,
-                'age' => $student->age
-              )));
+            if($student->fetchOne()) {
+
+                print_r(json_encode(array(
+                    'id' => $student->id,
+                    'name' => $student->name,
+                    'address' => $student->address,
+                    'age' => $student->age
+                )));
+
+            } else {
+                echo json_encode(array('message' => "No records found!"));
+            }
 
         } else {
-            echo json_encode(array('message' => "No records found!"));
+            echo json_encode(array('message' => "Error: Student ID is missing!"));
         }
-
     } else {
-        echo json_encode(array('message' => "Error: Student ID is missing!"));
+        echo json_encode(array('message' => "Error: incorrect Method!"));
     }

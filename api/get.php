@@ -5,26 +5,31 @@
     include_once '../config/Database.php';
     include_once '../models/Student.php';
 
-    $db = new Database();
-    $db = $db->connect();
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    $student = new Student($db);
+        $db = new Database();
+        $db = $db->connect();
 
-    $res = $student->fetchAll();
-    $resCount = $res->rowCount();
+        $student = new Student($db);
 
-    if($resCount > 0) {
+        $res = $student->fetchAll();
+        $resCount = $res->rowCount();
 
-        $students = array();
+        if($resCount > 0) {
 
-        while($row = $res->fetch(PDO::FETCH_ASSOC)) {
+            $students = array();
 
-            extract($row);
-            array_push($students, array( 'id' => $id, 'name' => $name, 'address' => $address, 'age' => $age));
+            while($row = $res->fetch(PDO::FETCH_ASSOC)) {
+
+                extract($row);
+                array_push($students, array( 'id' => $id, 'name' => $name, 'address' => $address, 'age' => $age));
+            }
+            
+            echo json_encode($students);
+
+        } else {
+            echo json_encode(array('message' => "No records found!"));
         }
-        
-        echo json_encode($students);
-
     } else {
-        echo json_encode(array('message' => "No records found!"));
+        echo json_encode(array('message' => "Error: incorrect Method!"));
     }

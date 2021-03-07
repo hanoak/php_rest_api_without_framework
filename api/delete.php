@@ -6,25 +6,30 @@
     include_once '../config/Database.php';
     include_once '../models/Student.php';
 
-    $db = new Database();
-    $db = $db->connect();
+	if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
-    $student = new Student($db);
+		$db = new Database();
+		$db = $db->connect();
 
-    $data = json_decode(file_get_contents("php://input"));
+		$student = new Student($db);
 
-    $student->id = isset($data->id) ? $data->id : NULL;
-    $student->name = $data->name;
-    $student->address = $data->address;
-    $student->age = $data->age;
+		$data = json_decode(file_get_contents("php://input"));
 
-    if(! is_null($student->id)) {
-  
-        if($student->delete()) {
-          echo json_encode(array('message' => 'Student deleted'));
-        } else {
-          echo json_encode(array('message' => 'Student Not deleted, try again!'));
-        }
-    } else {
-      echo json_encode(array('message' => "Error: Student ID is missing!"));
-    }
+		$student->id = isset($data->id) ? $data->id : NULL;
+		$student->name = $data->name;
+		$student->address = $data->address;
+		$student->age = $data->age;
+
+		if(! is_null($student->id)) {
+	
+			if($student->delete()) {
+			echo json_encode(array('message' => 'Student deleted'));
+			} else {
+			echo json_encode(array('message' => 'Student Not deleted, try again!'));
+			}
+		} else {
+		echo json_encode(array('message' => "Error: Student ID is missing!"));
+		}
+	} else {
+		echo json_encode(array('message' => "Error: incorrect Method!"));
+	}

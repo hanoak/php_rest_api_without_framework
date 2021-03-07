@@ -6,19 +6,24 @@
     include_once '../config/Database.php';
     include_once '../models/Student.php';
 
-    $db = new Database();
-    $db = $db->connect();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $student = new Student($db);
+      $db = new Database();
+      $db = $db->connect();
 
-    $data = json_decode(file_get_contents("php://input"));
+      $student = new Student($db);
 
-    $student->name = $data->name;
-    $student->address = $data->address;
-    $student->age = $data->age;
-  
-    if($student->postData()) {
-      echo json_encode(array('message' => 'Student added'));
+      $data = json_decode(file_get_contents("php://input"));
+
+      $student->name = $data->name;
+      $student->address = $data->address;
+      $student->age = $data->age;
+    
+      if($student->postData()) {
+        echo json_encode(array('message' => 'Student added'));
+      } else {
+        echo json_encode(array('message' => 'Student Not added, try again!'));
+      }
     } else {
-      echo json_encode(array('message' => 'Student Not added, try again!'));
+        echo json_encode(array('message' => "Error: incorrect Method!"));
     }
