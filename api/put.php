@@ -6,25 +6,30 @@
     include_once '../config/Database.php';
     include_once '../models/Student.php';
 
-    $db = new Database();
-    $db = $db->connect();
+    if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
-    $student = new Student($db);
+		$db = new Database();
+		$db = $db->connect();
 
-    $data = json_decode(file_get_contents("php://input"));
+		$student = new Student($db);
 
-    $student->id = isset($data->id) ? $data->id : NULL;
-    $student->name = $data->name;
-    $student->address = $data->address;
-    $student->age = $data->age;
+		$data = json_decode(file_get_contents("php://input"));
 
-    if(! is_null($student->id)) {
+		$student->id = isset($data->id) ? $data->id : NULL;
+		$student->name = $data->name;
+		$student->address = $data->address;
+		$student->age = $data->age;
 
-        if($student->putData()) {
-          echo json_encode(array('message' => 'Student updated'));
-        } else {
-          echo json_encode(array('message' => 'Student Not updated, try again!'));
-        }
-    } else {
-      echo json_encode(array('message' => "Error: Student ID is missing!"));
-    }
+		if(! is_null($student->id)) {
+
+			if($student->putData()) {
+			echo json_encode(array('message' => 'Student updated'));
+			} else {
+			echo json_encode(array('message' => 'Student Not updated, try again!'));
+			}
+		} else {
+		echo json_encode(array('message' => "Error: Student ID is missing!"));
+		}
+	} else {
+		echo json_encode(array('message' => "Error: incorrect Method!"));
+	}
