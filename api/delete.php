@@ -16,9 +16,6 @@
 		$data = json_decode(file_get_contents("php://input"));
 
 		$student->id = isset($data->id) ? $data->id : NULL;
-		$student->name = $data->name;
-		$student->address = $data->address;
-		$student->age = $data->age;
 
 		if(! is_null($student->id)) {
 	
