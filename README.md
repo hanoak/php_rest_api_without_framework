@@ -6,11 +6,11 @@
 
   
 
-Hi there, this is a simple REST API built in PHP without using any frameworks. This is built for the folks who are just getting started with APIs. As we all know that first working on core PHP gains a lot of knowledge on API, rather than jumping directly and relying on frameworks. So, I've built this simple PHP API that contains all CRUD operations. As an example, I've taken a student database with just name, address, and age as its table columns and have performed CRUD operations on it using APIs. Feel free to use this code and work around it. Hope you got the insights!
+🖐 Hi there, this is a simple REST API built in PHP without using any frameworks. This is built for the folks who are just getting started with APIs. As we all know that first working on core PHP gains a lot of knowledge on API, rather than jumping directly and relying on frameworks. So, I've built this simple PHP API that contains all CRUD operations. As an example, I've taken a student database with just name, address, and age as its table columns and have performed CRUD operations on it using APIs. Feel free to use this code and work around it. Hope you got the insights!
 
   
 
-## Contents
+## 📧Contents
 
   
 
@@ -24,7 +24,7 @@ Hi there, this is a simple REST API built in PHP without using any frameworks. T
 
   
 
-## How to use this project
+## 😀How to use this project
 
   
 
@@ -38,7 +38,7 @@ Hi there, this is a simple REST API built in PHP without using any frameworks. T
 
   
 
-## Endpoints
+## 📌Endpoints
 
   
 
@@ -52,7 +52,7 @@ Hi there, this is a simple REST API built in PHP without using any frameworks. T
 ![PUT METHOD](https://images2.imgbox.com/20/a2/Lg4U2hNS_o.jpg)
 5.  `http://localhost/php_rest_api_without_framework/api/delete.php`
 ![DELETE METHOD](https://images2.imgbox.com/c5/89/2s8M7yr0_o.jpg)
-## License
+## 📰License
 
   
 
@@ -61,7 +61,8 @@ Hi there, this is a simple REST API built in PHP without using any frameworks. T
 [MIT](https://choosealicense.com/licenses/mit/)
 
   
-
+## ❤️Loved this project?
+Please give me a **star**⭐ to this repo, I'll be happy😊.
   
 
 ## 🔗 Let's connect!
